@@ -1,0 +1,73 @@
+# Pre-registered exposures for primary OR concordance
+# Methodology LOCKED: K=8, L=3, adjusters, window [-365,-1]
+# Concept IDs: CLINICIAN_FILL before WP5; do not edit after OR readout
+
+version: 1
+status: clinician_fill
+science_family: prediagnosis_risk_factors
+window_days: [-365, -1]
+encoding_default: binary_ever
+
+k_primary: 8
+l_negative: 3
+
+adjusters_locked:
+  - age_at_index
+  - sex
+  - index_year
+  - utilization_visit_count_365d
+
+primary_exposures:
+  - id: E1
+    domain: cardiovascular
+    label: "Hypertension (draft domain)"
+    concepts: []  # CLINICIAN_FILL
+  - id: E2
+    domain: endocrine
+    label: "Diabetes mellitus (draft domain)"
+    concepts: []
+  - id: E3
+    domain: lipid_metabolic
+    label: "Dyslipidemia (draft domain)"
+    concepts: []
+  - id: E4
+    domain: autoimmune
+    label: "Autoimmune disease (draft domain)"
+    concepts: []
+  - id: E5
+    domain: infectious
+    label: "Recent viral illness / URI proxy (draft domain)"
+    concepts: []
+  - id: E6
+    domain: drug
+    label: "Ototoxic drug exposure (draft domain)"
+    concepts: []
+  - id: E7
+    domain: ent
+    label: "Prior otologic disease excl. SSNHL (draft domain)"
+    concepts: []
+  - id: E8
+    domain: vascular
+    label: "Cerebrovascular / thromboembolic history (draft domain)"
+    concepts: []
+
+negative_controls:
+  - id: N1
+    domain: negative_control
+    label: "Draft NC — clinician pick null association"
+    concepts: []
+    expected: "OR approximately 1 in Setup A"
+  - id: N2
+    domain: negative_control
+    label: "Draft NC — clinician pick null association"
+    concepts: []
+    expected: "OR approximately 1 in Setup A"
+  - id: N3
+    domain: negative_control
+    label: "Draft NC — clinician pick null association"
+    concepts: []
+    expected: "OR approximately 1 in Setup A"
+
+freeze_rule: >
+  Sign this file (status: frozen, frozen_date, frozen_by) before WP5.
+  Changing E/N after any Setup A/B OR estimate is SAP violation.

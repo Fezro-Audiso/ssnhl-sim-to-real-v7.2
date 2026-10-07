@@ -1,0 +1,79 @@
+# Cohort rules — USER AMENDED 2026-08-04 (v6 PTA-index)
+version: 6
+status: user_amended_v6_pta_index
+
+case:
+  source: "Case (SSNHL)/"
+  membership: PERSON_file
+  index:
+    rule: first_complete_ac_4pta
+    table: MEASUREMENT
+    definition: |
+      First date with complete air-conduction 4PTA (0.5/1/2/4 kHz) on either ear.
+      If both ears complete that day, affected ear = worse (higher) PTA.
+    followup_pta: |
+      Last complete 4PTA on the same affected ear with date in (index, index+365d].
+  exclude_if_no_index: true
+  synthesis_set: |
+    PTA-trackable only: baseline 4PTA present AND follow-up 4PTA present (Siegel not NA).
+    F1 and F2 share the same S.
+
+control:
+  source: "Control (Normal)/"
+  matching:
+    method: frequency
+    factors: [age_band_10y, sex]
+    ratio_control_per_case: 1
+  index_rule: |
+    Assign control index to matched case index date (first complete 4PTA).
+
+observation:
+  incomplete_period_rule: front_year
+  front_year_days: 365
+
+windows:
+  history_lookback_days: 365   # index - 1 year
+  followup_days: 365           # index + 1 year
+  F1_lookback: index_minus_365d
+  F2_followup: index_plus_365d
+
+synthesis:
+  scope: all_case_omop_tables
+  tables:
+    - PERSON
+    - OBSERVATION_PERIOD
+    - CONDITION_OCCURRENCE
+    - DRUG_EXPOSURE
+    - PROCEDURE_OCCURRENCE
+    - MEASUREMENT
+    - OBSERVATION
+    - DEVICE_EXPOSURE
+    - DEATH
+    - VISIT_OCCURRENCE
+    - VISIT_DETAIL
+  pta_incomplete: exclude_from_synthesis_set
+  steroid_hbot_missingness: preserve_rates
+  row_counts: match_S_train_exactly
+  deliverable: |
+    F2: Step2-pass only; F1: best Step2 among Step1-eligible (pass not required)
+
+splits:
+  case_train_holdout: [0.8, 0.2]
+  stratify_by: [age_band_10y, sex]
+  seed: 20260730
+
+age_bands_10y:
+  - [0, 10]
+  - [10, 20]
+  - [20, 30]
+  - [30, 40]
+  - [40, 50]
+  - [50, 60]
+  - [60, 70]
+  - [70, 80]
+  - [80, 120]
+
+qa_blockers:
+  - "Log attrition: raw Case → baseline 4PTA → PTA-trackable S → train/hold"
+  - "Deliverable table row counts must equal S_train"
+  - "F1 and F2 use the same S"

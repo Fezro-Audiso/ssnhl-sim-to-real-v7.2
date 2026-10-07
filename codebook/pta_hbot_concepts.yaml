@@ -1,0 +1,50 @@
+# PTA + HBOT concept map from [CDM] HBOT&PTA_MEASUREMENT_CONCEPT_ID.xlsx
+version: 1
+source_file: "[CDM] HBOT&PTA_MEASUREMENT_CONCEPT_ID.xlsx"
+sheet: PTA_id
+
+# Air-conduction 4PTA frequencies (Siegel): 500, 1000, 2000, 4000 Hz
+pta_4freq_ac:
+  right:
+    500: 900000029
+    1000: 900000030
+    2000: 900000031
+    4000: 900000033
+  left:
+    500: 900000042
+    1000: 900000043
+    2000: 900000044
+    4000: 900000046
+
+pta_all:
+  - {concept_id: 900000028, exam_cd: pta_rt_ac_250}
+  - {concept_id: 900000029, exam_cd: pta_rt_ac_500}
+  - {concept_id: 900000030, exam_cd: pta_rt_ac_1000}
+  - {concept_id: 900000031, exam_cd: pta_rt_ac_2000}
+  - {concept_id: 900000032, exam_cd: pta_rt_ac_3000}
+  - {concept_id: 900000033, exam_cd: pta_rt_ac_4000}
+  - {concept_id: 900000034, exam_cd: pta_rt_ac_8000}
+  - {concept_id: 900000035, exam_cd: pta_rt_bc_250}
+  - {concept_id: 900000036, exam_cd: pta_rt_bc_500}
+  - {concept_id: 900000037, exam_cd: pta_rt_bc_1000}
+  - {concept_id: 900000038, exam_cd: pta_rt_bc_2000}
+  - {concept_id: 900000039, exam_cd: pta_rt_bc_3000}
+  - {concept_id: 900000040, exam_cd: pta_rt_bc_4000}
+  - {concept_id: 900000041, exam_cd: pta_lt_ac_250}
+  - {concept_id: 900000042, exam_cd: pta_lt_ac_500}
+  - {concept_id: 900000043, exam_cd: pta_lt_ac_1000}
+  - {concept_id: 900000044, exam_cd: pta_lt_ac_2000}
+  - {concept_id: 900000045, exam_cd: pta_lt_ac_3000}
+  - {concept_id: 900000046, exam_cd: pta_lt_ac_4000}
+  - {concept_id: 900000047, exam_cd: pta_lt_ac_8000}
+  - {concept_id: 900000048, exam_cd: pta_lt_bc_250}
+  - {concept_id: 900000049, exam_cd: pta_lt_bc_500}
+  - {concept_id: 900000050, exam_cd: pta_lt_bc_1000}
+  - {concept_id: 900000051, exam_cd: pta_lt_bc_2000}
+  - {concept_id: 900000052, exam_cd: pta_lt_bc_3000}
+  - {concept_id: 900000053, exam_cd: pta_lt_bc_4000}
+
+hbot:
+  concept_id: 4087611
+  exam_cd: HBOT
+  # table resolved at runtime (procedure/measurement/observation/device)

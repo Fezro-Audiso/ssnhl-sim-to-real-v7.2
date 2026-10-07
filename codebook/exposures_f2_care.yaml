@@ -1,0 +1,39 @@
+# F2 Care / Recovery — updated with official PTA/HBOT map
+version: 4
+family: F2_recovery
+status: user_locked
+window: index_plus_365d
+
+concept_source: "[CDM] HBOT&PTA_MEASUREMENT_CONCEPT_ID.xlsx"
+
+purpose: "SSNHL hearing recovery by Siegel criteria"
+analysis_unit: case_only
+
+outcome:
+  name: siegel_recovery
+  pta_frequencies_hz: [500, 1000, 2000, 4000]
+  pta_aggregation: mean_air_conduction
+  pta_concepts:
+    right: {500: 900000029, 1000: 900000030, 2000: 900000031, 4000: 900000033}
+    left: {500: 900000042, 1000: 900000043, 2000: 900000044, 4000: 900000046}
+  affected_ear_rule: worse_baseline_pta
+  primary_binary:
+    positive_classes: [CR, PR]
+    negative_classes: [SI, NI]
+  classes:
+    CR: {rule: "final_pta <= 25"}
+    PR: {rule: "gain > 15 and 25 <= final_pta <= 45"}
+    SI: {rule: "gain > 15 and final_pta > 45"}
+    NI: {rule: "gain < 15 or final_pta >= 75"}
+
+interventions:
+  - id: I1
+    domain: steroid
+    table: DRUG_EXPOSURE
+    concepts: [42919316, 19068126, 21600828]
+  - id: I2
+    domain: hbot
+    table: PROCEDURE_OCCURRENCE
+    concepts: [4087611]
+
+adjusters_primary: [age_at_index, sex]

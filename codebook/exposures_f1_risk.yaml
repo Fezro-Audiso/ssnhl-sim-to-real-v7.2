@@ -1,0 +1,36 @@
+# F1 Risk — USER LOCKED domains 2026-07-30e
+version: 2
+family: F1_risk
+status: user_locked_domains
+window: index_minus_365d
+
+
+k_primary: 3
+l_negative: 0
+
+adjusters_primary:
+  - age_at_index
+  - sex
+
+primary_exposures:
+  - id: E1
+    domain: ssnhl_diagnosis
+    label: "돌발성 난청 진단 (index 이전)"
+    table: CONDITION_OCCURRENCE
+    concepts: []  # map concept_ids before WP5
+  - id: E2
+    domain: steroid_rx
+    label: "Steroid 처방 (index 이전)"
+    table: DRUG_EXPOSURE
+    concepts: []
+  - id: E3
+    domain: pta
+    label: "PTA 결과 (index 이전)"
+    table: MEASUREMENT
+    concepts: []
+
+negative_controls: []
+
+notes:
+  - "NC not used (user unspecified)"
+  - "Freeze concepts status:frozen before WP5 OR readout"

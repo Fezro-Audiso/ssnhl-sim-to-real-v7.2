@@ -1,0 +1,25 @@
+# Case membership + SSNHL diagnosis concepts for v5 index
+version: 3
+status: user_amended_v5
+
+cohort_membership:
+  rule: person_in_case_folder
+  path: "Case (SSNHL)/CASE_PERSON.xls"
+
+index:
+  rule: first_ssnhl_diagnosis_date
+  table: CONDITION_OCCURRENCE
+  # Proxies used until full ICD/OMOP SSNHL map is frozen
+  concepts:
+    - "4193704"
+    - "4174977"
+    - "4098611"
+    - "140673"
+  fallback: first_any_condition_start_date
+
+ssnhl_diagnosis_concepts_for_E1:
+  concepts:
+    - "4193704"
+    - "4174977"
+    - "4098611"
+    - "140673"
